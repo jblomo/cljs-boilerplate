@@ -1,0 +1,10 @@
+pom.xml
+cljs-devmode.sh
+*jar
+*swp
+/lib/
+/classes/
+/resources/public/
+/intermediate/
+.lein-failures
+.lein-deps-sum
