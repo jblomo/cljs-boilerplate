@@ -1,6 +1,6 @@
 pom.xml
 cljs-devmode.sh
-*jar
+/*jar
 *swp
 /lib/
 /classes/
