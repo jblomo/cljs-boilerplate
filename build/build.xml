@@ -652,7 +652,7 @@
             <arg line="--preserve-php"/>
             <srcfile/>
             <arg value="-o"/>
-            <mapper type="glob" from="*" to="../${dir.publish}/*"/>
+			<mapper type="glob" from="*" to="../../${dir.publish}/*"/>
             <targetfile/>
         </apply>
     </target>
@@ -674,7 +674,7 @@
             <arg line="--preserve-php"/>
             <srcfile/>
             <arg value="-o"/>
-            <mapper type="glob" from="*" to="../${dir.publish}/*"/>
+			<mapper type="glob" from="*" to="../../${dir.publish}/*"/>
             <targetfile/>
         </apply>
     </target>
@@ -695,7 +695,7 @@
             <arg line="--preserve-php"/>
             <srcfile/>
             <arg value="-o"/>
-            <mapper type="glob" from="*" to="../${dir.publish}/*"/>
+			<mapper type="glob" from="*" to="../../${dir.publish}/*"/>
             <targetfile/>
         </apply>
     </target>

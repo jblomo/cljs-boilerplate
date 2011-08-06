@@ -1,5 +1,7 @@
 (defproject
   cljs-boilerplate "0.0.1-SNAPSHOT"
+  ; comment below out for production
+  :resources-path "resources-dev"
   :description "Example applications of ClojureScript"
   :dependencies [[org.clojure/clojure "1.2.1"]
                  [compojure "0.6.5"]
