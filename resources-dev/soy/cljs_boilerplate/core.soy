@@ -30,19 +30,23 @@
   <!-- CSS: implied media="all" -->
   <link rel="stylesheet" href="css/style.css">
 
+	<!-- TODO dynamically include style sheet based on controller? -->
+	<link rel="stylesheet" href="css/main.css">
+
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
   <!-- All JavaScript at the bottom, except for Modernizr and Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.min.js"></script>
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
   <script src="js/libs/respond.min.js"></script>
 
   <!-- CLJS generated -->
+	<!-- TODO swap out dev style CLJS includes -->
   <script type="text/javascript" src="cljs/out/goog/base.js"></script>
   <script type="text/javascript" src="cljs/cljs-boilerplate.js"></script>
   <script type="text/javascript">
-  	goog.require('hello.core');
+  	goog.require('countdown.core');
   </script>
 </head>
 {/template}
@@ -54,17 +58,102 @@
 <body>
 
 	<div id="container">
-		<header>
-		cljs-boilerplate
-		</header>
-		<div id="main" role="main">
-			<span id="countdown">start</span>
-			<script>
-				hello.core.start_countdown(10);
-			</script>
-		</div>
-		<footer>
+		<!-- layout based on
+		http://codefastdieyoung.com/2011/03/want-to-move-fast-just-do-this-part-1-design/
+		-->
+		<header id="page-header">
+		<div class="container">
 
+			<span id="logo">
+				cljs-boilerplate
+			</span>
+
+			<div id="site-nav">
+				<a href="/">Home</a>
+				<a href="https://github.com/jblomo/cljs-boilerplate">Github</a>
+				<!--
+				<a href="/docs">Docs</a>
+				-->
+			</div>
+
+		</div>
+		</header>
+
+		<div id="main" role="main">
+			<div id="primary">
+				<div class="container">
+					<div class="prepend-2 span-10" id="marketing-main-message">
+						<h1>Bringing together the best practices of Clojure, ClojureScript,
+							HTML5 Boilerplate, and Google Closure.</h1>
+						<hr/>
+						<h2>Quickly develop and launch your website using fun
+							technologies.</h2>
+						<!-- TODO port fancy buttons
+						<a href="/demo">Try the Demo</a>
+						-->
+					</div>
+
+					<div class="span-10 append-2 last" id="marketing-workflow">
+						<ol>
+							<li>git fork cljs-boilerplate</li>
+							<li>setup cljs-devmode</li>
+							<li>lein ring server</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+
+			<div id="secondary">
+				<div class="container">
+					<div class="prepend-4 span-5">
+						<h2>Recent Updates</h2>
+						<p>TODO</p>
+					</div>
+					<div class="prepend-4 span-5 last">
+						<h2>Other stuff</h2>
+					</div>
+				</div>
+			</div>
+
+			<div id="info-boxes" class="container prepend-1">
+				<div class="info-box span-7" style="text-align:center;">
+					<header style="margin-bottom:10px;">Custom Widgets</header>
+					<div id="countdown"></div>
+					<script>
+						countdown.core.countdown_button();
+					</script>
+				</div>
+
+				<div class="info-box span-7">
+					<header>Minimization &amp; Caching</header>
+					<ul>
+						<li>H5BP scripts compact CSS, HTML, Javascript plugins</li>
+						<li>ClojureScript creates compact Javascript with Google's Advanced
+						optimizations</li>
+						<li>Google Closure Templates can be used client and server side</li>
+					</ul>
+				</div>
+
+				<div class="info-box span-7 last">
+					<header>Clojure Server &amp; Client Side</header>
+					<!-- TODO syntax highlighting -->
+					<pre>{literal}
+; compojure/ring
+(def the-app
+ (-> app
+   (wrap-templates-recompile)
+   (wrap-cljs-forward "/cljs")))
+
+; clojurescript
+(let [counter (dom/getElement "countdown")]
+ (when (pos? n)
+  (dom/setTextContent counter n)))
+					{/literal}</code>
+				</div>
+			</div><!-- infoboxes -->
+
+		<footer class="countainer">
+		© 2011 Jim Blomo
 		</footer>
 	</div> <!--! end of #container -->
 
@@ -91,17 +180,4 @@
  */
 {template .footer}
 </html>
-{/template}
-
-/**
- * Greets a person using "Hello" by default.
- * @param name The name of the person.
- * @param? greetingWord Optional greeting word to use instead of "Hello".
- */
-{template .helloName}
-  {if not $greetingWord}
-    Hello {$name}!
-  {else}
-    {$greetingWord} {$name}!
-  {/if}
 {/template}

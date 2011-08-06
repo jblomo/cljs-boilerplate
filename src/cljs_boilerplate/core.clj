@@ -24,10 +24,10 @@
 
 (defn- wrap-templates-recompile [handler]
   (if *debug*
-    (do
+    (fn [& args]
       ; TODO only compile templates that have changed
       (tofu/compile!)
-      handler)
+      (apply handler args))
     handler))
 
 (defroutes app
