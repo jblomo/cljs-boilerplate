@@ -1,17 +1,12 @@
 (ns cljs-boilerplate.core
   (:require [closure.templates.core :as templ]
             [closure.templates.tofu :as tofu]
+            [closure.templates.fileset :as fileset]
             [compojure.route :as route])
-  (:use compojure.core
+  (:use [cljs-boilerplate.settings :only (*dev-mode*)]
+        compojure.core
         ring.adapter.jetty
         cljs-devmode.ring-middleware))
-
-; TODO move this setting into project.clj
-; TODO use this variable to set goog.DEBUG
-(def *debug* true)
-
-(templ/deftemplate hello-name [name]
-                   {:name name})
 
 (templ/deftemplate html [title]
                    {:title title})
@@ -19,11 +14,14 @@
 (templ/deftemplate body []
                    {})
 
+(templ/deftemplate settings []
+                   {})
+
 (templ/deftemplate footer []
                    {})
 
 (defn- wrap-templates-recompile [handler]
-  (if *debug*
+  (if *dev-mode*
     (fn [& args]
       ; TODO only compile templates that have changed
       (tofu/compile!)
@@ -35,6 +33,11 @@
                 (str
                   (html "cljs-boilerplate")
                   (body)
+                  (footer)))
+           (GET "/settings" []
+                (str
+                  (html "cljs-boilerplate")
+                  (settings)
                   (footer)))
            (route/resources "/"))
 

@@ -1,0 +1,2 @@
+\{\/?(sp|nil|\\r|\\n|\\t|lb|rb|namespace|template|literal|print|\$|msg|if|elseif|else|switch|core|default|foreach|ifempty|for|call|param|css).*?\}
+\/\*.+?\*\/

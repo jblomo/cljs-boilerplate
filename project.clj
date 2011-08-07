@@ -1,7 +1,8 @@
+(use 'cljs-boilerplate.settings)
+
 (defproject
   cljs-boilerplate "0.0.2-SNAPSHOT"
-  ; comment below out for production
-  :resources-path "resources-dev"
+  :resources-path ~(if *dev-mode* "resources-dev" "resources")
   :description "An attempt to bring together the best practices of Clojure, ClojureScript, HTML5 Boilerplate, and Google Closure."
   :url "https://github.com/jblomo/cljs-boilerplate"
   :dependencies [[org.clojure/clojure "1.2.1"]
@@ -12,4 +13,3 @@
                      [lein-ring "0.4.5"]
                      [org.apache.ant/ant "1.8.2"]]
   :ring {:handler cljs-boilerplate.core/the-app})
-

@@ -8,7 +8,7 @@
             [goog.fx.Animation.EventType :as a-event-type]
             [goog.fx.dom.PredefinedEffect :as effect]))
 
-(defn ^:export TextResize [element start end time opt_acc]
+(defn TextResize [element start end time opt_acc]
   (let [pe-start (if (goog/isNumber start) (array start) start)
         pe-end (if (goog/isNumber end) (array end) end)]
     (.call goog.fx.dom.PredefinedEffect (js* "this") element pe-start pe-end time opt_acc)
@@ -25,7 +25,7 @@
 
 (declare countdown-button)
 
-(defn ^:export start-countdown [n]
+(defn start-countdown [n]
   (let [counter (dom/getElement "countdown")]
     (if (pos? n)
       (do
@@ -44,12 +44,11 @@
         (dom/setTextContent counter "")
         (countdown-button)))))
 
-(defn ^:export countdown-button []
+(defn countdown-button []
   (doto (goog.ui.Button. "Start Countdown")
     (.render (dom/getElement "countdown"))
     (.setTooltip "This Javascript was written in ClojureScript!")
     (events/listen c-event-type/ACTION #(start-countdown 10))))
 
-(defn ^:export utf8-test []
-  (when (keyword? :keyword)
-    (dom/setTextContent (dom/getElement "utf8-test") "working")))
+(defn init []
+  (countdown-button))
