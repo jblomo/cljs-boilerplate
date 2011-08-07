@@ -15,17 +15,21 @@ compilation of cljs scripts.  Read
 http://html5boilerplate.com/docs/#Build-script to understand how to setup
 compilation of the templates.
 
+To run in development mode:
+* ./cljs-devmode.sh & # this is created by the cljs-devmode process above
+* ../lein ring server &
+
 ## License
 
 Major components:
 
-Modernizr: MIT/BSD license
-jQuery: MIT/GPL license
-DD_belatedPNG: MIT license
-YUI Profiling: BSD license
-HTML5Doctor CSS reset: Public Domain
-CSS Reset Reloaded: Public Domain
-HTML5 Boilerplate: The Unlicense (http://unlicense.org/, aka: public domain)
+* Modernizr: MIT/BSD license
+* jQuery: MIT/GPL license
+* DD_belatedPNG: MIT license
+* YUI Profiling: BSD license
+* HTML5Doctor CSS reset: Public Domain
+* CSS Reset Reloaded: Public Domain
+* HTML5 Boilerplate: The Unlicense (http://unlicense.org/, aka: public domain)
 
 Everything else:
 
