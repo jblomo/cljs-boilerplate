@@ -1,29 +1,32 @@
 (ns cljs-boilerplate.core
   (:require [closure.templates.core :as templ]
             [closure.templates.tofu :as tofu]
+            [closure.templates.fileset :as fileset]
             [compojure.route :as route])
   (:use [cljs-boilerplate.settings :only (*dev-mode*)]
         compojure.core
         ring.adapter.jetty
         cljs-devmode.ring-middleware))
 
-(templ/deftemplate hello-name [name]
-                   {:name name})
+(binding [fileset/*globals* {:goog.DEBUG *dev-mode*}]
+  (templ/deftemplate html [title]
+                     {:title title})
 
-(templ/deftemplate html [title]
-                   {:title title})
+  (templ/deftemplate body []
+                     {})
 
-(templ/deftemplate body []
-                   {})
+  (templ/deftemplate settings []
+                     {})
 
-(templ/deftemplate footer []
-                   {})
+  (templ/deftemplate footer []
+                     {}))
 
 (defn- wrap-templates-recompile [handler]
   (if *dev-mode*
     (fn [& args]
       ; TODO only compile templates that have changed
-      (tofu/compile!)
+      (binding [fileset/*globals* {:goog.DEBUG *dev-mode*}]
+        (tofu/compile!))
       (apply handler args))
     handler))
 
@@ -32,6 +35,11 @@
                 (str
                   (html "cljs-boilerplate")
                   (body)
+                  (footer)))
+           (GET "/settings" []
+                (str
+                  (html "cljs-boilerplate")
+                  (settings)
                   (footer)))
            (route/resources "/"))
 

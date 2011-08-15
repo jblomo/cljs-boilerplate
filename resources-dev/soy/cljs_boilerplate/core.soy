@@ -181,3 +181,16 @@
 {template .footer}
 </html>
 {/template}
+
+/**
+ * Check some settings
+ */
+{template .settings}
+<ul>
+
+{if goog.DEBUG}
+<li>goog.DEBUG is trueish: {goog.DEBUG}</li>
+{/if}
+
+</ul>
+{/template}
