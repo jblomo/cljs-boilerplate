@@ -10,6 +10,7 @@
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
@@ -23,31 +24,25 @@
   <meta name="author" content="Jim Blomo">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
-  <!-- CSS: implied media="all" -->
+  <!-- CSS: implied media=all -->
+  <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/style.css">
-
-	<!-- TODO dynamically include style sheet based on controller? -->
-	<link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
-  <!-- All JavaScript at the bottom, except for Modernizr and Respond.
+  <!-- All JavaScript at the bottom, except for this custom Modernizr build containing Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
-       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
+       For optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
   <script src="js/libs/respond.min.js"></script>
 
-  <!-- CLJS generated -->
-	<!-- TODO swap out dev style CLJS includes -->
-  <script type="text/javascript" src="cljs/out/goog/base.js"></script>
-  <script type="text/javascript" src="cljs/cljs-boilerplate.js"></script>
-  <script type="text/javascript">
-  	goog.require('countdown.core');
-  </script>
+
 </head>
 {/template}
 
@@ -55,7 +50,7 @@
  * Body with countdown span
  */
 {template .body}
-<body>
+<body class="main-page">
 
 	<div id="container">
 		<!-- layout based on
@@ -119,9 +114,6 @@
 				<div class="info-box span-7" style="text-align:center;">
 					<header style="margin-bottom:10px;">Custom Widgets</header>
 					<div id="countdown"></div>
-					<script>
-						countdown.core.countdown_button();
-					</script>
 				</div>
 
 				<div class="info-box span-7">
@@ -157,20 +149,36 @@
 		</footer>
 	</div> <!--! end of #container -->
 
-
   <!-- JavaScript at the bottom for fast page loading -->
 
+  <!-- CLJS generated dynamically in dev, this section removed by ant build script-->
+  <script type="text/javascript" src="cljs/out/goog/base.js"></script>
+  <script type="text/javascript" src="cljs/cljs-boilerplate.js"></script>
+  <script type="text/javascript">
+  	goog.require('initializer.core');
+  </script>
+  <!-- end CLJS-->
+  
   <!-- scripts concatenated and minified via ant build script-->
-  <script src="js/plugins.js"></script>
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
   <!-- end scripts-->
 
-	
+  <!-- Change UA-XXXXX-X to be your site's ID -->
+	{literal}<script>
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+	</script>{/literal}
+
+
   <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
        chromium.org/developers/how-tos/chrome-frame-getting-started -->
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    {literal}<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>{/literal}
-  <![endif]-->
+	<!--[if lt IE 7 ]>{literal}
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+	{/literal}<![endif]-->
   
 </body>
 {/template}
