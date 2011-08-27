@@ -1,11 +1,13 @@
 pom.xml
 cljs-devmode.sh
 /*jar
-*swp
-*swo
+/*war
+*sw[op]
 /lib/
 /classes/
-/resources/public/
+/resources/
 /intermediate/
+/cljs/*js
+/cljs/out/
 .lein-failures
 .lein-deps-sum

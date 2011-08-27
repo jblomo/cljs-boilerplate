@@ -2,9 +2,9 @@
   (:require [closure.templates.core :as templ]
             [closure.templates.tofu :as tofu]
             [closure.templates.fileset :as fileset]
-            [compojure.route :as route])
-  (:use [cljs-boilerplate.settings :only (*dev-mode*)]
-        compojure.core
+            [compojure.route :as route]
+            [cljs-boilerplate.settings :as settings])
+  (:use compojure.core
         ring.adapter.jetty
         cljs-devmode.ring-middleware))
 
@@ -21,7 +21,7 @@
                    {})
 
 (defn- wrap-templates-recompile [handler]
-  (if *dev-mode*
+  (if settings/*dev-mode*
     (fn [& args]
       ; TODO only compile templates that have changed
       (tofu/compile!)
@@ -29,6 +29,7 @@
     handler))
 
 (defroutes app
+           (HEAD "/" [] "") ; beanstalk monitoring
            (GET "/" []
                 (str
                   (html "cljs-boilerplate")
@@ -48,4 +49,7 @@
     (wrap-cljs-forward "/cljs")))
 
 (defn -main []
-  (run-jetty (var the-app) {:port 8080}))
+  (let [port (Integer/parseInt
+               (or (System/getenv "PORT")
+                   settings/*default-port*))]
+    (run-jetty app {:port port})))
