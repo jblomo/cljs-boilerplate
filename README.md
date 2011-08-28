@@ -20,10 +20,12 @@ http://html5boilerplate.com/docs/#Build-script to understand how to setup
 compilation of the templates.
 
 To run in development mode:
+
 * ./cljs-devmode.sh & # this is created by the cljs-devmode process above
 * lein ring server &
 
 To run in production mode:
+
 * def *dev-mode* false in settings
 * cd build && ant
 * lein beanstalk deploy production || lein ring uberwar
