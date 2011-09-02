@@ -1,52 +1,42 @@
 (ns cljs-boilerplate.core
-  (:require [closure.templates.core :as templ]
-            [closure.templates.tofu :as tofu]
-            [closure.templates.fileset :as fileset]
+  (:require [ring.middleware.closure-templates :as templ]
             [compojure.route :as route]
+            [compojure.route.clojurescript :as cljsc]
             [cljs-boilerplate.settings :as settings])
   (:use compojure.core
-        ring.adapter.jetty
-        cljs-devmode.ring-middleware))
+        [clojure.java.io :only (as-file resource)]
+        [cljs-boilerplate.templates.util :only (template-response)]
+        ring.adapter.jetty))
 
-(templ/deftemplate html [title]
-                   {:title title})
+(def template-globals
+  {:goog.DEBUG settings/*dev-mode*})
 
-(templ/deftemplate body []
-                   {})
-
-(templ/deftemplate settings []
-                   {})
-
-(templ/deftemplate footer []
-                   {})
-
-(defn- wrap-templates-recompile [handler]
-  (if settings/*dev-mode*
-    (fn [& args]
-      ; TODO only compile templates that have changed
-      (tofu/compile!)
-      (apply handler args))
-    handler))
+(defroutes template-routes
+           (GET "/" [] (template-response
+                {:title "cljs-boilerplate"
+                 :template ["cljs_boilerplate.core.header"
+                            "cljs_boilerplate.core.main"
+                            "cljs_boilerplate.core.footer"]}))
+           (GET "/settings" [] (template-response
+                {:title "settings - cljs-boilerplate"
+                 :template ["cljs_boilerplate.core.header"
+                           "cljs_boilerplate.core.settings"
+                           "cljs_boilerplate.core.footer"]})))
 
 (defroutes app
            (HEAD "/" [] "") ; beanstalk monitoring
-           (GET "/" []
-                (str
-                  (html "cljs-boilerplate")
-                  (body)
-                  (footer)))
-           (GET "/settings" []
-                (str
-                  (html "cljs-boilerplate")
-                  (settings)
-                  (footer)))
-           (route/resources "/"))
+           (templ/wrap-templates template-routes
+                                 (resource "soy")
+                                 {:dynamic settings/*dev-mode*
+                                  :globals template-globals})
 
-(def the-app
-  (-> app
-    ; TODO only wrap handlers that use templates
-    (wrap-templates-recompile)
-    (wrap-cljs-forward "/cljs")))
+           (if settings/*dev-mode* ; only compile cljs in dev mode
+             (cljsc/compiled-clojurescript "/cljs/")
+             (constantly nil))
+
+           (route/resources "/")
+           ; TODO fix (not-found URL)
+           (route/not-found (as-file (resource "public/404.html"))))
 
 (defn -main []
   (let [port (Integer/parseInt

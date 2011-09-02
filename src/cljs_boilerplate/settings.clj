@@ -1,13 +1,15 @@
 (ns cljs-boilerplate.settings)
 
-(def *dev-mode* false)
+(def ^:dynamic *dev-mode* true)
 
 ; use a string for compatibility with ENV
-(def *default-port* (if *dev-mode* "3000" "80"))
+(def ^:dynamic *default-port* (if *dev-mode* "3000" "80"))
 
-(def *aws-credentials* {:access-key "XXXXXXXXXXXXXXXXXXXX"
-                            :secret-key "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"})
+(def ^:dynamic *aws-credentials*
+  {:access-key "XXXXXXXXXXXXXXXXXXXX"
+   :secret-key "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"})
 
+; 'import' custom settings that will override the defaults above
 (try 
   (require 'cljs-boilerplate.settings.custom)
   (doseq [[var value] (ns-publics 'cljs-boilerplate.settings.custom)]

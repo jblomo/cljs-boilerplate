@@ -1,6 +1,6 @@
 # cljs-boilerplate
 
-ALPHA
+BETA
 
 An attempt to bring together the best practices of Clojure, ClojureScript, HTML5
 Boilerplate, and Google Closure.  The end goal is an environment for quick
@@ -13,21 +13,19 @@ Hopefully the demo is up at http://cljs-boilerplate.elasticbeanstalk.com/
 
 ## Usage
 
-Much of the setup is currently manual.  Read
-https://github.com/maxweber/cljs-devmode to understand how to setup auto
-compilation of cljs scripts.  Read
-http://html5boilerplate.com/docs/#Build-script to understand how to setup
-compilation of the templates.
+Not all dependencies are uploaded to clojars, so if lein/maven complains check
+github for the latest version.
 
 To run in development mode:
 
-* ./cljs-devmode.sh & # this is created by the cljs-devmode process above
+* def settings/*dev-mode* true
 * lein ring server &
 
 To run in production mode:
 
-* def *dev-mode* false in settings
+* def settings/*dev-mode* false
 * cd build && ant
+* LEIN_NO_DEV=true lein ring server   # for testing
 * lein beanstalk deploy production || lein ring uberwar
 
 ## License

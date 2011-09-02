@@ -1,6 +1,7 @@
 (ns initializer.core
   (:require [initializer.main-page :as main-page]
-             [goog.dom :as dom]))
+            [initializer.settings-page :as settings-page]
+            [goog.dom :as dom]))
 
 ; Based on the "Garber-Irish implementation" of page init scripts.
 ; Actions are triggered based based on the class and id of the body element
@@ -19,7 +20,8 @@
   (into {} (map find-actions (ns-aliases *ns*)))))
 
 (def actions
-  {:main-page main-page/actions})
+  {:main-page main-page/actions
+   :settings-page settings-page/actions})
 
 (defn trigger [body-class & [body-id]]
   "Run the action associated with the class and, optionally, id of the body

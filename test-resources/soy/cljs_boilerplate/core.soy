@@ -1,10 +1,10 @@
-{namespace cljsBoilerplate.core}
+{namespace cljs_boilerplate.core}
 
 /**
  * Header with the defaults we like, from HTML5 Boilerplate
  * @param title The name of the person.
  */
-{template .html}
+{template .header}
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -49,7 +49,7 @@
 /**
  * Body with countdown span
  */
-{template .body}
+{template .main}
 <body class="main-page">
 
 	<div id="container">
@@ -90,8 +90,8 @@
 
 					<div class="span-10 append-2 last" id="marketing-workflow">
 						<ol>
-							<li>git fork cljs-boilerplate</li>
-							<li>setup cljs-devmode</li>
+							<li>git clone cljs-boilerplate</li>
+							<li>edit settings/custom.cljs</li>
 							<li>lein ring server</li>
 						</ol>
 					</div>
@@ -111,36 +111,38 @@
 			</div>
 
 			<div id="info-boxes" class="container prepend-1">
+				<div class="info-box span-8">
+					<header>Minimization &amp; Caching</header>
+					<ul style="margin-right:1em;">
+						<li>H5BP scripts compact CSS, HTML, Javascript plugins</li>
+						<li>ClojureScript creates compact Javascript with Google's Advanced
+						optimizations</li>
+						<li>Google Closure Templates can be used client and server side</li>
+						<li>*dev-mode* true makes all changes reflected on reload</li>
+					</ul>
+				</div>
+
 				<div class="info-box span-7" style="text-align:center;">
 					<header style="margin-bottom:10px;">Custom Widgets</header>
 					<div id="countdown"></div>
 				</div>
 
-				<div class="info-box span-7">
-					<header>Minimization &amp; Caching</header>
-					<ul>
-						<li>H5BP scripts compact CSS, HTML, Javascript plugins</li>
-						<li>ClojureScript creates compact Javascript with Google's Advanced
-						optimizations</li>
-						<li>Google Closure Templates can be used client and server side</li>
-					</ul>
-				</div>
-
-				<div class="info-box span-7 last">
+				<div class="info-box span-8 last">
 					<header>Clojure Server &amp; Client Side</header>
 					<!-- TODO syntax highlighting -->
 					<pre>{literal}
 ; compojure/ring
-(def the-app
- (-> app
-   (wrap-templates-recompile)
-   (wrap-cljs-forward "/cljs")))
+(defroutes app
+ (wrap-templates routes "soy")
+ (compiled-clojurescript "/cljs/"))
 
 ; clojurescript
-(let [counter (dom/getElement "countdown")]
- (when (pos? n)
-  (dom/setTextContent counter n)))
-					{/literal}</code>
+(doto (goog.ui.Button.
+       "Start Countdown")
+ (.render (dom/getElement
+           "countdown"))
+ (.setTooltip "This Javascript was
+       written in ClojureScript!")){/literal}</code>
 				</div>
 			</div><!-- infoboxes -->
 
@@ -148,12 +150,17 @@
 		© 2011 Jim Blomo
 		</footer>
 	</div> <!--! end of #container -->
+{/template}
 
+/**
+ * simple footer
+ */
+{template .footer}
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- CLJS generated dynamically in dev, this section removed by ant build script-->
   <script type="text/javascript" src="cljs/out/goog/base.js"></script>
-  <script type="text/javascript" src="cljs/cljs-boilerplate.js"></script>
+  <script type="text/javascript" src="cljs/bootstrap.js"></script>
   <script type="text/javascript">
   	goog.require('initializer.core');
   </script>
@@ -181,12 +188,21 @@
 	{/literal}<![endif]-->
   
 </body>
-{/template}
-
-/**
- * simple footer
- */
-{template .footer}
 </html>
 {/template}
 
+/**
+ * Check some settings
+ */
+{template .settings}
+<body class="settings-page">
+
+	<div id="container">
+		<ul>
+
+			<li>goog.DEBUG is trueish: {goog.DEBUG}</li>
+			<li>javascript being served UTF-8: <span id="keyword"></span></li>
+
+		</ul>
+	</div>
+{/template}
