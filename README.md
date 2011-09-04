@@ -18,15 +18,15 @@ github for the latest version.
 
 To run in development mode:
 
-* def settings/*dev-mode* true
-* lein ring server &
+* def `settings/*dev-mode*` true
+* `lein ring server &`
 
 To run in production mode:
 
-* def settings/*dev-mode* false
-* cd build && ant
-* LEIN_NO_DEV=true lein ring server   # for testing
-* lein beanstalk deploy production || lein ring uberwar
+* def `settings/*dev-mode*` false
+* `cd build && ant`
+* `LEIN_NO_DEV=true lein ring server   # for testing`
+* `lein beanstalk deploy production || lein ring uberwar`
 
 ## License
 
