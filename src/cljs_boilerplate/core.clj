@@ -2,14 +2,15 @@
   (:require [ring.middleware.closure-templates :as templ]
             [compojure.route :as route]
             [compojure.route.clojurescript :as cljsc]
-            [cljs-boilerplate.settings :as settings])
+            [cljs-boilerplate.settings.global :as global]
+            [cljs-boilerplate.settings.http :as http])
   (:use compojure.core
         [clojure.java.io :only (as-file resource)]
         [cljs-boilerplate.templates.util :only (template-response)]
         ring.adapter.jetty))
 
 (def template-globals
-  {:goog.DEBUG settings/*dev-mode*})
+  {:goog.DEBUG (:dev-mode global/options)})
 
 (defroutes template-routes
            (GET "/" [] (template-response
@@ -27,10 +28,10 @@
            (HEAD "/" [] "") ; beanstalk monitoring
            (templ/wrap-templates template-routes
                                  (resource "soy")
-                                 {:dynamic settings/*dev-mode*
+                                 {:dynamic (:dev-mode global/options)
                                   :globals template-globals})
 
-           (if settings/*dev-mode* ; only compile cljs in dev mode
+           (if (:dev-mode global/options) ; only compile cljs in dev mode
              (cljsc/compiled-clojurescript "/cljs/")
              (constantly nil))
 
@@ -39,7 +40,4 @@
            (route/not-found (as-file (resource "public/404.html"))))
 
 (defn -main []
-  (let [port (Integer/parseInt
-               (or (System/getenv "PORT")
-                   settings/*default-port*))]
-    (run-jetty app {:port port})))
+    (run-jetty app {:port (:default-port http/options)}))

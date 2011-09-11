@@ -494,10 +494,14 @@
     <target name="-js.cljs.compile" description="(PRIVATE) Compiles ClojureScript source to Javascript, creates externs file for advanced HTML optimization">
         <mkdir dir="./${dir.intermediate}/${dir.js.mylibs}"/>
 
-        <echo message="Compiling ClojureScript for externs"/>
-	<exec executable="${tool.cljsc}" dir="${basedir}/cljs">
-		<arg path="cljs/src"/>
-		<arg value='{:output-to "cljs.compile.js"}'/>
+        <echo message="Compiling advanced optimized ClojureScript for production"/>
+	<exec executable="${tool.lein}" dir="${basedir}">
+		<env key="LEIN_NO_DEV" value="true"/>
+		<arg value="run"/>
+		<arg value="-m"/>
+		<arg value="ring.middleware.clojurescript"/>
+		<arg path="cljs"/>
+		<arg value='{:optimizations :advanced :output-to "${basedir}/${dir.intermediate}/${dir.js.mylibs}/cljs.compile.min.js"}'/>
 	</exec>
 
 	<echo message="Creating externs"/>
@@ -509,11 +513,6 @@
 		<arg path="cljs/out"/>
 	</exec>
 
-        <echo message="Compiling advanced optimized ClojureScript for production"/>
-	<exec executable="${tool.cljsc}" dir="${basedir}/cljs">
-		<arg path="cljs/src"/>
-		<arg value='{:optimizations :advanced :output-to "${basedir}/${dir.intermediate}/${dir.js.mylibs}/cljs.compile.min.js"}'/>
-	</exec>
     </target>
 
     <target name="-js.mylibs.concat" depends="-js.all.minify,-js.cljs.compile" description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">

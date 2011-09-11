@@ -7,6 +7,9 @@ Boilerplate, and Google Closure.  The end goal is an environment for quick
 development (eg no manual compiling) and an efficient production deploy (eg
 mimification and advanced cljs compiling).
 
+cljs-boilerplate should provide reasonable defaults to get a site up and running
+quickly, but allow components to be added or removed easily when desired.  
+
 ## Demo
 
 Hopefully the demo is up at http://cljs-boilerplate.elasticbeanstalk.com/
@@ -18,12 +21,10 @@ github for the latest version.
 
 To run in development mode:
 
-* def `settings/*dev-mode*` true
 * `lein ring server &`
 
 To run in production mode:
 
-* def `settings/*dev-mode*` false
 * `cd build && ant`
 * `LEIN_NO_DEV=true lein ring server   # for testing`
 * `lein beanstalk deploy production || lein ring uberwar`
