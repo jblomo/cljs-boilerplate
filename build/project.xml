@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+<project name="Project Build" default="build" basedir="../">
+	
+  <target name="-cljs.production"
+          depends="-js.cljs.compile,
+                   -build.production"/>
+
+    <!-- Use this file to define any custom build targets (for example, automatically deploying via FTP). -->
+    <target name="-js.cljs.compile" description="(PRIVATE) Compiles ClojureScript source to Javascript, creates externs file for advanced HTML optimization">
+        <mkdir dir="./${dir.intermediate}/${dir.js.mylibs}"/>
+
+        <echo message="Compiling advanced optimized ClojureScript for production"/>
+	<exec executable="${tool.lein}" dir="${basedir}">
+		<env key="LEIN_NO_DEV" value="true"/>
+		<arg value="run"/>
+		<arg value="-m"/>
+		<arg value="ring.middleware.clojurescript"/>
+		<arg path="cljs"/>
+		<arg value='{:optimizations :advanced :output-to "${basedir}/${dir.intermediate}/${dir.js.mylibs}/cljs.compile.min.js"}'/>
+	</exec>
+
+	<echo message="Creating externs"/>
+	<exec executable="grep" dir="${basedir}/cljs">
+		<redirector output="cljs/externs.js"/>
+		<arg line="-rh"/>
+		<arg line="--exclude-dir goog"/>
+		<arg line="goog.export"/>
+		<arg path="cljs/out"/>
+	</exec>
+
+    </target>
+
+</project>
