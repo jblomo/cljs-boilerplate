@@ -18,10 +18,10 @@
       (throw (js/Error "start and end sizes must be 1D")))))
 (goog/inherits TextResize goog.fx.dom.PredefinedEffect)
 
-(set! (.. TextResize prototype updateStyle)
+(set! (.. TextResize -prototype -updateStyle)
       (fn []
-        (set! (.. (js* "this") element style fontSize)
-              (str (get (.coords (js* "this")) 0) "px"))))
+        (set! (.. (js* "this") -element -style -fontSize)
+              (str (get (.-coords (js* "this")) 0) "px"))))
 
 (declare countdown-button)
 
@@ -34,11 +34,11 @@
         ; You could accomplish this with a more complex subclass of
         ; PredefinedEffect, but then you wouldn't get to play with events!
         (doto (goog.fx.dom.FadeOut. counter 1000)
-          (events/listen a-event-type/END #(.. counter style (removeProperty "opacity")))
-          (. (play)))
+          (events/listen a-event-type/END #(.. counter -style (removeProperty "opacity")))
+          (. play))
         (doto (TextResize. counter 200 10 1000)
-          (events/listen a-event-type/END #(.. counter style (removeProperty "font-size")))
-          (. (play)))
+          (events/listen a-event-type/END #(.. counter -style (removeProperty "font-size")))
+          (. play))
         (timer/callOnce (partial start-countdown (dec n)) 1000))
       (do ; else restore button
         (dom/setTextContent counter "")

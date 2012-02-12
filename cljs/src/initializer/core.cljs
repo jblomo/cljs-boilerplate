@@ -35,8 +35,8 @@
 (defn load-events []
   "Iterate through the classes of the body element, and trigger all associated
   actions."
-  (let [body-id (.. (js* "document") body id)]
-    (doseq [body-class  (.. (js* "document") body className (split #"\s+"))]
+  (let [body-id (.. (js* "document") -body -id)]
+    (doseq [body-class  (.. (js* "document") -body -className (split #"\s+"))]
       (trigger body-class)
       (when-not (empty? body-id)
         (trigger body-class body-id)))))
