@@ -6,43 +6,31 @@
  */
 {template .header}
 <!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-       More info: h5bp.com/b/378 -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>{$title}</title>
-  <meta name="description" content="cljs-boilerplate">
-  <meta name="author" content="Jim Blomo">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="viewport" content="width=device-width">
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	{literal}<style>
+	body {
+	  padding-top: 60px;
+	  padding-bottom: 40px;
+	}
+	</style>{/literal}
+	<link rel="stylesheet" href="css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="css/style.css">
 
-  <!-- CSS: implied media=all -->
-  <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/main.css">
-  <!-- end CSS-->
-
-  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
-
-  <!-- All JavaScript at the bottom, except for this custom Modernizr build containing Respond.
-       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
-       For optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
-  <script src="js/libs/respond.min.js"></script>
-
-
+	<script src="js/libs/modernizr-2.5.2-respond-1.1.0.min.js"></script>
 </head>
 {/template}
 
@@ -51,85 +39,55 @@
  */
 {template .main}
 <body class="main-page">
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 
-	<div id="container">
-		<!-- layout based on
-		http://codefastdieyoung.com/2011/03/want-to-move-fast-just-do-this-part-1-design/
-		-->
-		<header id="page-header">
-		<div class="container">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">cljs-boilerplate</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="https://github.com/jblomo/cljs-boilerplate">Github</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-			<span id="logo">
-				cljs-boilerplate
-			</span>
+    <div class="container">
 
-			<div id="site-nav">
-				<a href="/">Home</a>
-				<a href="https://github.com/jblomo/cljs-boilerplate">Github</a>
-				<!--
-				<a href="/docs">Docs</a>
-				-->
+      <!-- Main hero unit for a primary marketing message or call to action -->
+			<div class="hero-unit">
+				<h1>cljs-boilerplate</h1>
+				<p>Bringing together the best practices of Clojure, ClojureScript,
+				HTML5 Boilerplate, and Google Closure.</p>
+				<p><a href="https://github.com/jblomo/cljs-boilerplate" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 			</div>
 
-		</div>
-		</header>
-
-		<div id="main" role="main">
-			<div id="primary">
-				<div class="container">
-					<div class="prepend-2 span-10" id="marketing-main-message">
-						<h1>Bringing together the best practices of Clojure, ClojureScript,
-							HTML5 Boilerplate, and Google Closure.</h1>
-						<hr/>
-						<h2>Quickly develop and launch your website using fun
-							technologies.</h2>
-						<!-- TODO port fancy buttons
-						<a href="/demo">Try the Demo</a>
-						-->
-					</div>
-
-					<div class="span-10 append-2 last" id="marketing-workflow">
-						<ol>
-							<li>git clone cljs-boilerplate</li>
-							<li>edit settings/custom.cljs</li>
-							<li>lein ring server</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-
-			<div id="secondary">
-				<div class="container">
-					<div class="prepend-4 span-5">
-						<h2>Recent Updates</h2>
-						<p>TODO</p>
-					</div>
-					<div class="prepend-4 span-5 last">
-						<h2>Other stuff</h2>
-					</div>
-				</div>
-			</div>
-
-			<div id="info-boxes" class="container prepend-1">
-				<div class="info-box span-8">
-					<header>Minimization &amp; Caching</header>
-					<ul style="margin-right:1em;">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>Minimization &amp; Caching</h2>
+					<ul>
 						<li>H5BP scripts compact CSS, HTML, Javascript plugins</li>
 						<li>ClojureScript creates compact Javascript with Google's Advanced
 						optimizations</li>
 						<li>Google Closure Templates can be used client and server side</li>
-						<li>*dev-mode* true makes all changes reflected on reload</li>
+						<li><code>$LEIN_NO_DEV=true</code> makes all changes reflected on reload</li>
 					</ul>
-				</div>
-
-				<div class="info-box span-7" style="text-align:center;">
-					<header style="margin-bottom:10px;">Custom Widgets</header>
-					<div id="countdown"></div>
-				</div>
-
-				<div class="info-box span-8 last">
-					<header>Clojure Server &amp; Client Side</header>
-					<!-- TODO syntax highlighting -->
+        </div>
+        <div class="span4">
+          <h2>Custom Widgets</h2>
+					<div id="countdown" style="margin-top:100px; text-align:center;"></div>
+       </div>
+        <div class="span4">
+          <h2>Clojure Server &amp; Client Side</h2>
 					<pre>{literal}
 ; compojure/ring
 (defroutes app
@@ -139,17 +97,18 @@
 ; clojurescript
 (doto (goog.ui.Button.
        "Start Countdown")
- (.render (dom/getElement
-           "countdown"))
+ (.render (dom/getElement "countdown"))
  (.setTooltip "This Javascript was
-       written in ClojureScript!")){/literal}</code>
-				</div>
-			</div><!-- infoboxes -->
+       written in ClojureScript!")){/literal}</pre>
+        </div>
+      </div>
 
-		<footer class="countainer">
-		© 2011 Jim Blomo
-		</footer>
-	</div> <!--! end of #container -->
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+    </div> <!-- /container -->
 {/template}
 
 /**
@@ -166,27 +125,20 @@
   </script>
   <!-- end CLJS-->
   
-  <!-- scripts concatenated and minified via ant build script-->
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
-  <!-- end scripts-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
-  <!-- Change UA-XXXXX-X to be your site's ID -->
-	{literal}<script>
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-	</script>{/literal}
+<script src="js/libs/bootstrap/transition.js"></script>
+<script src="js/libs/bootstrap/collapse.js"></script>
 
+<script src="js/script.js"></script>
+{literal}<script>
+	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>{/literal}
 
-  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-       chromium.org/developers/how-tos/chrome-frame-getting-started -->
-	<!--[if lt IE 7 ]>{literal}
-    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-	{/literal}<![endif]-->
-  
 </body>
 </html>
 {/template}

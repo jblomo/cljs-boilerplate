@@ -46,6 +46,7 @@
 
 (defn countdown-button []
   (doto (goog.ui.Button. "Start Countdown")
+    (.addClassName "btn btn-large btn-success")
     (.render (dom/getElement "countdown"))
     (.setTooltip "This Javascript was written in ClojureScript!")
     (events/listen c-event-type/ACTION #(start-countdown 10))))
