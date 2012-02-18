@@ -8,7 +8,7 @@
 
     <!-- Use this file to define any custom build targets (for example, automatically deploying via FTP). -->
     <target name="-js.cljs.compile" description="(PRIVATE) Compiles ClojureScript source to Javascript, creates externs file for advanced HTML optimization">
-        <mkdir dir="./${dir.intermediate}/${dir.js.mylibs}"/>
+        <mkdir dir="./${dir.intermediate}/${dir.js}"/>
 
         <echo message="Compiling advanced optimized ClojureScript for production"/>
 	<exec executable="${tool.lein}" dir="${basedir}">
@@ -17,7 +17,7 @@
 		<arg value="-m"/>
 		<arg value="ring.middleware.clojurescript"/>
 		<arg path="cljs"/>
-		<arg value='{:optimizations :advanced :output-to "${basedir}/${dir.intermediate}/${dir.js.mylibs}/cljs.compile.min.js"}'/>
+		<arg value='{:optimizations :advanced :output-to "${basedir}/${dir.intermediate}/${dir.js}/cljs.compile.min.js"}'/>
 	</exec>
 
 	<echo message="Creating externs"/>

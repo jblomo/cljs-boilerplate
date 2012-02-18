@@ -354,9 +354,9 @@
           depends="-intro,
                    -usemin,
                    -js.all.minify,
+		   -js.cljs.compile,
                    -js.main.concat,
                    -js.mylibs.concat,
-		   -js.cljs.compile,
                    -js.scripts.concat,
                    -css,
                    -manifest,
@@ -507,7 +507,7 @@
       </concat>
   </target>
 
-  <target name="-js.mylibs.concat" depends="-js.all.minify" description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
+  <target name="-js.mylibs.concat" depends="-js.all.minify,-js.cljs.compile" description="(PRIVATE) Concatenates the JS files in dir.js.mylibs">
       <echo message="Concatenating JS libraries"/>
       <echo message="Concatenating all files in ./${dir.intermediate}/${dir.js}/ that don't fit the H5BL folder structure" />
       <echo message="The following will be excluded: ${file.js.bypass}, ${dir.js.libs}/*, ${dir.js.modules}/*,  ${file.root.script}, scripts-concat.js and plugins.js" />
