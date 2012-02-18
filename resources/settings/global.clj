@@ -1,1 +1,1 @@
-{:dev-mode true}
+{:dev-mode false}
