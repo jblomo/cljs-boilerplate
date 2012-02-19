@@ -410,7 +410,9 @@
   <!-- This is a private target -->
       <echo message="Cleaning up previous build directory..."/>
       <delete dir="./${dir.intermediate}/"/>
-      <delete dir="./${dir.publish}/"/>
+      <delete>
+	      <fileset dir="./${dir.publish}/" excludes="${file.default.exclude}, ${file.exclude}"/>
+      </delete>
   </target>
 
 
