@@ -12,7 +12,8 @@
 
         <echo message="Compiling advanced optimized ClojureScript for production"/>
 	<exec executable="${tool.lein}" dir="${basedir}">
-		<env key="LEIN_NO_DEV" value="true"/>
+		<arg value="with-profile"/>
+		<arg value="prod,user"/>
 		<arg value="run"/>
 		<arg value="-m"/>
 		<arg value="ring.middleware.clojurescript"/>

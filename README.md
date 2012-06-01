@@ -21,13 +21,13 @@ github for the latest version.
 
 To run in development mode:
 
-* `lein ring server &`
+* `lein2 ring server &`
 
 To run in production mode:
 
 * `cd build && ant`
-* `LEIN_NO_DEV=true lein ring server   # for testing`
-* `lein beanstalk deploy production || lein ring uberwar`
+* `lein2 with-profile prod ring server`
+* `lein2 with-profile prod beanstalk deploy production # or uberwar`
 
 ## License
 
