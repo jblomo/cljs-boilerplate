@@ -1,10 +1,10 @@
-(ns cljs-boilerplate.settings
+(ns project.settings
   "Settings are managed in the options Var of a namespace under this one.  The
   name space sets up defaults, then merges in customized settings from the
   resource path.  The resource path can vary depending on the deployment
   environment.  For production, the resource path is `resources/`.  During
   development, the `dev-resources` path is checked first.  For example, to
-  provide custom settings for the cljs-boilerplate.aws module in development,
+  provide custom settings for the project.aws module in development,
   the last statement of `dev-resources/settings/aws.clj` should be the custom
   options map."
   (:require [clojure.java.io :as jio]))

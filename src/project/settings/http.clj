@@ -1,6 +1,6 @@
-(ns cljs-boilerplate.settings.http
-  (:require [cljs-boilerplate.settings :as settings]
-            [cljs-boilerplate.settings.global :as global]))
+(ns project.settings.http
+  (:require [project.settings :as settings]
+            [project.settings.global :as global]))
 
 (def options
   (merge {:default-port

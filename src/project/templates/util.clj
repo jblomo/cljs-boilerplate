@@ -1,4 +1,4 @@
-(ns cljs-boilerplate.templates.util
+(ns project.templates.util
   (:use [ring.util.response :only (content-type)]))
 
 (defn template-response

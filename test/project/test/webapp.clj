@@ -1,5 +1,5 @@
-(ns cljs-boilerplate.test.core
-  (:use [cljs-boilerplate.core])
+(ns project.test.webapp
+  (:use [project.webapp])
   (:use [clojure.test]))
 
 (deftest replace-me ;; FIXME: write

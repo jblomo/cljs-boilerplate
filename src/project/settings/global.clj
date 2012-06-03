@@ -1,5 +1,5 @@
-(ns cljs-boilerplate.settings.global
-  (:require [cljs-boilerplate.settings :as settings]))
+(ns project.settings.global
+  (:require [project.settings :as settings]))
 
 (def ^:private dev-mode false)
 

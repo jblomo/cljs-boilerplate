@@ -2,7 +2,7 @@
   (:require [initializer.main-page :as main-page]
             [initializer.settings-page :as settings-page]
             [goog.dom :as dom])
-  (:require-macros [cljs-boilerplate.settings.cljs :as settings]))
+  (:require-macros [project.settings.cljs :as settings]))
 
 ; Based on the "Garber-Irish implementation" of page init scripts.
 ; Actions are triggered based based on the class and id of the body element

@@ -1,8 +1,8 @@
 (ns initializer.settings-page
   (:require [goog.dom :as dom])
-  (:require-macros [cljs-boilerplate.settings.cljs :as settings]))
+  (:require-macros [project.settings.cljs :as settings]))
 
-(settings/defoptions global cljs-boilerplate.settings.global)
+(settings/defoptions global project.settings.global)
 
 (def actions 
   {:init (fn []

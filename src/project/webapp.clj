@@ -1,12 +1,12 @@
-(ns cljs-boilerplate.core
+(ns project.webapp
   (:require [ring.middleware.closure-templates :as templ]
             [compojure.route :as route]
             [compojure.route.clojurescript :as cljsc]
-            [cljs-boilerplate.settings.global :as global]
-            [cljs-boilerplate.settings.http :as http])
+            [project.settings.global :as global]
+            [project.settings.http :as http])
   (:use compojure.core
         [clojure.java.io :only (as-file resource)]
-        [cljs-boilerplate.templates.util :only (template-response)]
+        [project.templates.util :only (template-response)]
         ring.adapter.jetty))
 
 (def template-globals
@@ -14,15 +14,15 @@
 
 (defroutes template-routes
            (GET "/" [] (template-response
-                {:title "cljs-boilerplate"
-                 :template ["cljs_boilerplate.core.header"
-                            "cljs_boilerplate.core.main"
-                            "cljs_boilerplate.core.footer"]}))
+                {:title "project"
+                 :template ["project.webapp.header"
+                            "project.webapp.main"
+                            "project.webapp.footer"]}))
            (GET "/settings" [] (template-response
-                {:title "settings - cljs-boilerplate"
-                 :template ["cljs_boilerplate.core.header"
-                           "cljs_boilerplate.core.settings"
-                           "cljs_boilerplate.core.footer"]})))
+                {:title "settings - project"
+                 :template ["project.webapp.header"
+                           "project.webapp.settings"
+                           "project.webapp.footer"]})))
 
 (defroutes app
            (HEAD "/" [] "") ; beanstalk monitoring
